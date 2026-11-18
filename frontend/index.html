@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adinath Agri Services — Business Platform</title>
+<meta name="theme-color" content="#123B2D">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Adinath Agri">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/icons/adinath-agri-logo.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css?v=premium-green-6">
+<link rel="stylesheet" href="/static/css/premium.css?v=ca-accounting-1">
+<link rel="stylesheet" href="/static/css/print.css?v=gst-billing-3" media="print">
+</head>
+<body data-active-view="dashboard">
+
+<!-- ================= LOGIN SCREEN ================= -->
+<div id="loginScreen">
+  <div class="login-orb login-orb-one"></div><div class="login-orb login-orb-two"></div>
+  <div class="login-shell">
+    <aside class="login-intro" aria-label="About Adinath Agri Services">
+      <div class="login-brand">
+        <span class="login-brand-mark"><img src="/icons/adinath-agri-logo.svg" alt="Adinath Agri Services"></span>
+        <div class="login-brand-type"><strong>ADINATH</strong><span>AGRI SERVICES</span></div>
+      </div>
+      <div class="login-intro-copy"><span class="login-eyebrow">BUSINESS PLATFORM</span><h1>Run your agri business with clarity.</h1><p>One secure space for billing, inventory, customers and business performance.</p></div>
+      <div class="login-benefits"><span><i>✓</i> Live billing &amp; inventory</span><span><i>✓</i> Customer receivables</span><span><i>✓</i> Real-time business insights</span></div>
+      <div class="login-intro-footer"><span class="login-status-dot"></span> Your business data stays private</div>
+    </aside>
+    <main class="login-card">
+      <div class="login-mobile-brand login-brand"><span class="login-brand-mark"><img src="/icons/adinath-agri-logo.svg" alt="Adinath Agri Services"></span><div class="login-brand-type"><strong>ADINATH</strong><span>AGRI SERVICES</span></div></div>
+      <div class="login-card-heading"><div class="login-heading-top"><span class="login-eyebrow">WELCOME BACK</span><span class="login-verified"><i></i> SECURE ACCESS</span></div><h2 id="loginHeading">Sign in to your workspace</h2><p>Use your administrator or staff credentials to continue.</p></div>
+      <div class="login-fields">
+        <label id="setupNameLabel">Your name<input id="setupName" placeholder="Enter your full name" autocomplete="name" style="display:none;"></label>
+        <label>Username<input id="loginUsername" placeholder="Enter your username" autocomplete="username"></label>
+        <label>Password<div class="password-field"><input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password"><button class="password-toggle" id="passwordToggle" type="button" onclick="togglePasswordVisibility()" aria-label="Show password" aria-pressed="false" title="Show password"><i data-lucide="eye" class="lucide-icon" aria-hidden="true"></i></button></div></label>
+      </div>
+      <div class="login-options" aria-label="Sign in preferences"><label><input id="rememberSession" type="checkbox" aria-label="Remember me"> <span>Remember me</span></label><span class="forgot-password" aria-label="Password recovery is managed by your administrator">Forgot password?</span></div>
+      <div id="loginError" role="alert" aria-live="assertive"></div>
+      <button id="loginBtn" type="button" onclick="handleLogin()"><span>Log In</span><i data-lucide="arrow-right" class="lucide-icon" aria-hidden="true"></i></button>
+      <div id="setupHint"></div>
+      <p class="login-security"><i data-lucide="lock-keyhole" class="lucide-icon" aria-hidden="true"></i> Secure, private workspace access</p>
+      <div class="login-card-footer"><span>ADINATH AGRI SERVICES</span><span>•</span><span>BUSINESS PLATFORM</span></div>
+    </main>
+  </div>
+</div>
+
+<div class="app" id="mainApp" style="display:none;">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img class="logo-mark" src="/icons/adinath-agri-logo.svg" alt="Adinath Agri Services logo">
+      <div>
+        <div class="brand-name">Adinath Agri Services</div>
+        <div class="brand-sub">BETTER FARMING | BRIGHTER FUTURE.</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a class="nav-item active" data-view="dashboard">
+        <i data-lucide="layout-dashboard" class="lucide-icon" aria-hidden="true"></i>
+        <span>Dashboard</span>
+      </a>
+      <a class="nav-item" data-view="billing">
+        <i data-lucide="receipt-text" class="lucide-icon" aria-hidden="true"></i>
+        <span>Billing</span>
+      </a>
+      <a class="nav-item" data-view="products">
+        <i data-lucide="package" class="lucide-icon" aria-hidden="true"></i>
+        <span>Products</span>
+      </a>
+      <a class="nav-item" data-view="inventory">
+        <i data-lucide="warehouse" class="lucide-icon" aria-hidden="true"></i>
+        <span>Inventory</span>
+      </a>
+      <a class="nav-item" data-view="farmers">
+        <i data-lucide="users" class="lucide-icon" aria-hidden="true"></i>
+        <span>Customers</span>
+      </a>
+      <a class="nav-item" data-view="sales">
+        <i data-lucide="file-text" class="lucide-icon" aria-hidden="true"></i>
+        <span>Sales &amp; Invoices</span>
+      </a>
+      <a class="nav-item" data-view="purchases">
+        <i data-lucide="shopping-cart" class="lucide-icon" aria-hidden="true"></i>
+        <span>Purchases</span>
+      </a>
+      <a class="nav-item" data-view="outstanding">
+        <i data-lucide="wallet" class="lucide-icon" aria-hidden="true"></i>
+        <span>Receivables</span>
+      </a>
+      <a class="nav-item" data-view="reports">
+        <i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i>
+        <span>Reports</span>
+      </a>
+      <a class="nav-item accounting-only" data-view="accounting">
+        <i data-lucide="calculator" class="lucide-icon" aria-hidden="true"></i>
+        <span>CA Accounting</span>
+      </a>
+      <a class="nav-item" data-view="settings">
+        <i data-lucide="settings" class="lucide-icon" aria-hidden="true"></i>
+        <span>Account Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">PH</div>
+      <div>
+        <div class="staff-name">Prajot Hosure</div>
+        <div class="staff-role">Shop Admin</div>
+      </div>
+      <button class="icon-btn" type="button" title="Log out" aria-label="Log out" onclick="logout()">
+        <i data-lucide="log-out" class="lucide-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </aside>
+  <button class="sidebar-backdrop" type="button" aria-label="Close navigation" onclick="toggleSidebar()"></button>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Collapse navigation" title="Collapse navigation">
+        <i data-lucide="menu" class="lucide-icon" aria-hidden="true"></i>
+      </button>
+      <button class="icon-btn app-back-btn" id="appBackBtn" type="button" onclick="goBack()" aria-label="Go back" title="Go back" disabled>
+        <i data-lucide="arrow-left" class="lucide-icon" aria-hidden="true"></i>
+      </button>
+      <div class="page-title" id="pageTitle">Dashboard</div>
+      <div class="topbar-datetime" id="topbarDateTime" aria-live="off"></div>
+      <div class="topbar-search">
+        <i data-lucide="search" class="lucide-icon" aria-hidden="true"></i>
+        <input type="search" id="globalSearch" placeholder="Search products, customers... (Ctrl + K)" aria-label="Search products or customers" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="globalSearchResults">
+        <div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="Search results" hidden></div>
+      </div>
+      <div class="topbar-right">
+        <button class="install-app-btn" id="installAppBtn" type="button" hidden title="Install Adinath Agri Services as an app" aria-label="Install Adinath Agri Services">
+          <i data-lucide="download" class="lucide-icon" aria-hidden="true"></i>
+          <span>Install App</span>
+        </button>
+        <button class="icon-btn theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false">
+          <i data-lucide="moon" class="lucide-icon theme-icon-dark" aria-hidden="true"></i>
+          <i data-lucide="sun" class="lucide-icon theme-icon-light" aria-hidden="true"></i>
+        </button>
+        <div class="notification-wrap">
+        <button class="icon-btn notification-trigger" id="notificationTrigger" type="button" aria-label="Notifications" title="Notifications" aria-expanded="false" aria-controls="notificationCenter" onclick="toggleNotifications()">
+          <i data-lucide="bell" class="lucide-icon" aria-hidden="true"></i>
+          <span class="dot-badge" id="notificationBadge" hidden></span>
+        </button>
+        <section class="notification-center" id="notificationCenter" role="region" aria-labelledby="notificationHeading" hidden>
+          <div class="notification-head"><div><strong id="notificationHeading">Notifications</strong><span id="notificationCount">You're all caught up</span></div><button class="btn btn-ghost" type="button" onclick="markAllNotificationsRead()">Mark all read</button></div>
+          <div class="notification-list" id="notificationList"></div>
+        </section>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">PH</div>
+          <div>
+            <div class="topbar-profile-name" id="currentUserName">Signed in user</div>
+            <div class="topbar-profile-role" id="currentUserRole">Staff</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ================= DASHBOARD VIEW ================= -->
+      <section class="view active" id="view-dashboard">
+        <div class="dash-hero">
+          <div class="dash-hero-copy">
+            <span class="dash-kicker">Welcome to</span>
+            <h1><span>Adinath Agri Services</span></h1>
+            <p>Better Farming | Brighter Future.</p>
+          </div>
+          <div class="dash-hero-landscape" aria-hidden="true">
+            <img src="/static/images/dashboard-field.webp" alt="Green agricultural fields beneath a bright sky">
+          </div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Total Sales</span><div class="metric-icon green"><i data-lucide="shopping-cart" class="lucide-icon" aria-hidden="true"></i></div></div>
+            <div class="metric-value" id="mTotalSales">&#8377;0.00</div>
+            <div class="metric-trend">Value across recorded invoices</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Total Invoices</span><div class="metric-icon green"><i data-lucide="receipt-text" class="lucide-icon" aria-hidden="true"></i></div></div>
+            <div class="metric-value" id="mTotalInvoices">0</div>
+            <div class="metric-trend">Invoices recorded to date</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Total Customers</span><div class="metric-icon green"><i data-lucide="users" class="lucide-icon" aria-hidden="true"></i></div></div>
+            <div class="metric-value" id="mTotalCustomers">0</div>
+            <div class="metric-trend">Customers in your directory</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Total Products</span><div class="metric-icon green"><i data-lucide="package" class="lucide-icon" aria-hidden="true"></i></div></div>
+            <div class="metric-value" id="mTotalProducts">…</div>
+            <div class="metric-trend">Products in your catalogue</div>
+          </div>
+        </div>
+
+        <div class="panel dashboard-products-panel">
+          <div class="panel-head">
+            <div class="dashboard-panel-title"><i data-lucide="package-open" class="lucide-icon" aria-hidden="true"></i><span><span class="panel-title">Products in your catalog</span><span class="panel-caption">Live items ready for billing</span></span></div>
+            <a class="btn btn-ghost dashboard-products-view-all" onclick="goTo('products')">View all <span id="dashboardProductPreviewCount">0</span><i data-lucide="arrow-up-right" class="lucide-icon" aria-hidden="true"></i></a>
+          </div>
+          <div class="panel-body"><div class="dashboard-product-grid" id="dashboardProductList" aria-live="polite"></div></div>
+        </div>
+
+        <div class="dash-grid dashboard-primary-grid">
+          <div class="panel dashboard-sales-panel">
+            <div class="panel-head">
+              <div class="dashboard-panel-title"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i><span><span class="panel-title">Sales Overview</span><span class="panel-caption">Recorded sales across the selected period</span></span></div>
+              <div class="range-tabs">
+                <button class="range-tab active" type="button" data-range="7d">7D</button>
+                <button class="range-tab" type="button" data-range="30d">30D</button>
+                <button class="range-tab" type="button" data-range="today">Today</button>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="chart-wrap" id="salesChart"></div>
+            </div>
+          </div>
+          <div class="panel dashboard-invoices-panel">
+            <div class="panel-head"><div class="dashboard-panel-title"><i data-lucide="file-text" class="lucide-icon" aria-hidden="true"></i><span><span class="panel-title">Recent Invoices</span><span class="panel-caption">Latest invoices from your business</span></span></div><a class="btn btn-ghost" style="font-size:12px; padding:4px 6px;" onclick="goTo('sales')">View all <i data-lucide="arrow-up-right" class="lucide-icon" aria-hidden="true"></i></a></div>
+            <div class="panel-body table-wrap dashboard-recent-wrap">
+              <table id="recentTxnTable"></table>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel dashboard-stock-panel">
+          <div class="panel-head"><div class="dashboard-panel-title"><i data-lucide="package-search" class="lucide-icon" aria-hidden="true"></i><span><span class="panel-title">Stock Needs Attention</span><span class="panel-caption">Items at or below their threshold</span></span></div><a class="btn btn-ghost" style="font-size:12px; padding:4px 6px;" onclick="goTo('inventory')">View all <i data-lucide="arrow-up-right" class="lucide-icon" aria-hidden="true"></i></a></div>
+          <div class="panel-body"><div class="alert-list" id="stockAlertList"></div>
+          </div>
+        </div>
+        <details class="dashboard-quick-actions">
+          <summary><i data-lucide="sparkles" class="lucide-icon" aria-hidden="true"></i> Quick actions <i data-lucide="chevron-down" class="lucide-icon quick-actions-chevron" aria-hidden="true"></i></summary>
+          <div class="quick-actions" aria-label="Quick actions">
+            <button class="btn btn-primary" type="button" onclick="goTo('billing')"><i data-lucide="plus" class="lucide-icon" aria-hidden="true"></i>New Invoice</button>
+            <button class="btn btn-secondary" type="button" onclick="openFarmerForm()"><i data-lucide="user-round-plus" class="lucide-icon" aria-hidden="true"></i>New Customer</button>
+            <button class="btn btn-secondary admin-only" type="button" onclick="openProductForm()"><i data-lucide="package-plus" class="lucide-icon" aria-hidden="true"></i>New Product</button>
+            <button class="btn btn-secondary" type="button" onclick="goTo('outstanding')"><i data-lucide="wallet" class="lucide-icon" aria-hidden="true"></i>View Receivables</button>
+            <button class="btn btn-secondary" type="button" onclick="goTo('reports')"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i>Open Reports</button>
+          </div>
+        </details>
+      </section>
+
+      <!-- ================= BILLING VIEW ================= -->
+      <section class="view" id="view-billing">
+        <div class="billing-layout">
+          <div class="billing-left">
+            <div class="billing-title-row">
+              <div><div class="billing-breadcrumb"><span>Workspace</span><i>›</i><strong>Invoices</strong><i>›</i><b>Create</b></div><span class="billing-eyebrow">Point of sale</span><h1>Create Invoice</h1><p>Generate professional customer invoices.</p></div>
+              <button class="btn btn-secondary admin-only billing-add-product" type="button" onclick="openProductForm()">Add Product</button>
+            </div>
+            <div class="billing-search">
+              <i data-lucide="search" class="lucide-icon" aria-hidden="true"></i>
+              <input type="search" id="productSearch" placeholder="Search products, SKU or scan barcode" aria-label="Search products">
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+          </div>
+
+            <div class="billing-right">
+              <div class="bill-head">
+              <div class="bill-title-line"><div><span class="bill-eyebrow">Invoice draft</span><h2>Current Invoice</h2><div class="bill-date" id="billDate"></div></div><div class="bill-head-meta"><span class="bill-reference">DRAFT</span><span class="bill-item-count" id="billItemCount">0 items</span></div></div>
+              <div class="farmer-select" id="farmerSelectBtn" onclick="openFarmerPicker()">
+                <i data-lucide="user-round" class="lucide-icon" aria-hidden="true"></i>
+                <div>
+                  <div class="farmer-select-label">BILL TO</div>
+                  <div class="farmer-select-text" id="farmerSelectText">Select Customer</div>
+                </div>
+                <span class="farmer-select-arrow" aria-hidden="true">›</span>
+              </div>
+              <div class="invoice-customer-fields">
+                <div class="invoice-customer-heading">Invoice customer details <small>Optional for walk-in; used on the invoice</small></div>
+                <div class="invoice-customer-grid">
+                  <input id="invoiceCustomerName" placeholder="Customer name" aria-label="Customer name">
+                  <input id="invoiceCustomerPhone" placeholder="Contact number" aria-label="Customer contact number">
+                  <input id="invoiceCustomerGstin" placeholder="GSTIN/UIN (if registered)" aria-label="Customer GSTIN">
+                  <input id="invoiceCustomerState" placeholder="State name" aria-label="Customer state name">
+                  <input id="invoiceCustomerStateCode" placeholder="State code" maxlength="2" aria-label="Customer state code">
+                  <input id="invoiceCustomerAddress" placeholder="Billing / delivery address" aria-label="Customer billing or delivery address">
+                  <input id="invoiceDueDate" type="date" aria-label="Payment due date">
+                  <input id="invoicePaymentTerms" placeholder="Payment terms" aria-label="Payment terms">
+                  <input id="invoiceRemarks" placeholder="Invoice remarks" aria-label="Invoice remarks">
+                  <select id="invoiceType" aria-label="Invoice type"><option>TAX INVOICE</option><option>CREDIT TAX INVOICE</option></select>
+                </div>
+              </div>
+            </div>
+            <div class="bill-items" id="billItems"></div>
+            <div class="bill-summary">
+              <div class="summary-currency"><span>All amounts in Indian Rupees</span><b>INR ₹</b></div>
+              <div class="sum-row"><span>Subtotal</span><span id="sumSubtotal">₹0.00</span></div>
+              <div class="sum-row discount"><span>Product discounts</span><span id="sumProductDiscount">₹0.00</span></div>
+              <div class="sum-row discount"><span>Invoice discount</span><span class="amount-input"><b>₹</b><input type="number" id="discountInput" value="0" min="0" step="0.01" oninput="renderBill()"></span></div>
+              <div class="sum-row"><span id="sumTaxLabel">GST</span><span id="sumTax">₹0.00</span></div>
+              <div class="sum-divider"></div>
+              <div class="grand-total-row"><span class="grand-total-label">Grand Total</span><span class="grand-total-value" id="grandTotal">₹0</span></div>
+
+              <div class="payment-heading">Payment method</div>
+              <div class="pay-methods" id="payMethods">
+                <button class="pay-method active" data-pm="Cash">Cash</button>
+                <button class="pay-method" data-pm="UPI">UPI</button>
+                <button class="pay-method" data-pm="Bank">Bank</button>
+                <button class="pay-method" data-pm="Credit">Credit</button>
+              </div>
+              <div class="pay-inputs">
+                <div><label for="amountPaid">Amount Paid <span>INR</span></label><div class="rupee-input"><b>₹</b><input type="number" id="amountPaid" value="0" min="0" step="0.01" oninput="paymentIsManual=true; renderBill()"></div></div>
+                <div><label>Balance Due <span>INR</span></label><input type="text" id="balanceDue" value="₹0.00" readonly></div>
+              </div>
+              <div class="bill-actions">
+                <button class="btn btn-gold btn-block btn-lg" id="completeBillBtn" type="button" onclick="completeBill()">Complete &amp; Print Bill</button>
+                <button class="btn btn-secondary btn-block" type="button" onclick="clearCurrentBill()">Clear Current Bill</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PRODUCTS VIEW ================= -->
+      <section class="view" id="view-products">
+        <div class="page-head-row">
+          <h1>Products</h1>
+          <div class="head-actions">
+            <div class="search-box">
+              <i data-lucide="search" class="lucide-icon" aria-hidden="true"></i>
+              <input type="search" id="productsListSearch" placeholder="Search products" aria-label="Search products list">
+            </div>
+            <button class="btn btn-secondary" id="productFilterBtn" type="button" aria-expanded="false" onclick="toggleProductFilter()"><i data-lucide="list-filter" class="lucide-icon" aria-hidden="true"></i>Filter</button>
+            <select id="productCategoryFilter" class="list-filter" aria-label="Filter products by category" hidden onchange="filterProductsList()"><option value="">All categories</option></select>
+            <select id="productGstFilter" class="list-filter" aria-label="Filter products by GST rate" hidden onchange="filterProductsList()"><option value="">All GST rates</option></select>
+            <select id="productStockFilter" class="list-filter" aria-label="Filter products by stock level" hidden onchange="filterProductsList()"><option value="">All stock</option><option value="low">Low stock</option><option value="out">Out of stock</option><option value="in">In stock</option></select>
+            <button class="btn btn-secondary accounting-only" type="button" onclick="exportProductsCsv()"><i data-lucide="download" class="lucide-icon" aria-hidden="true"></i>Export</button>
+            <button class="btn btn-secondary admin-only" type="button" onclick="document.getElementById('productImportInput').click()"><i data-lucide="upload" class="lucide-icon" aria-hidden="true"></i>Import CSV</button>
+            <input type="file" id="productImportInput" accept=".csv,text/csv" hidden onchange="importProductsCsv(this.files[0]);this.value='';">
+            <button class="btn btn-primary admin-only" type="button" onclick="openProductForm()"><i data-lucide="plus" class="lucide-icon" aria-hidden="true"></i>Add Product</button>
+          </div>
+        </div>
+        <div class="card table-wrap">
+          <table id="productsTable"></table>
+        </div>
+      </section>
+
+      <!-- ================= INVENTORY VIEW ================= -->
+      <section class="view" id="view-inventory">
+        <div class="page-head-row"><h1>Inventory</h1></div>
+        <div class="card table-wrap">
+          <table id="inventoryTable"></table>
+        </div>
+      </section>
+
+      <!-- ================= FARMERS VIEW ================= -->
+      <section class="view" id="view-farmers">
+        <div class="page-head-row">
+          <h1>Customers</h1>
+          <div class="head-actions">
+            <div class="search-box">
+              <i data-lucide="search" class="lucide-icon" aria-hidden="true"></i>
+              <input type="search" id="farmersListSearch" placeholder="Search customers" aria-label="Search customers list">
+            </div>
+            <button class="btn btn-primary" type="button" onclick="openFarmerForm()"><i data-lucide="user-round-plus" class="lucide-icon" aria-hidden="true"></i>Add Customer</button>
+          </div>
+        </div>
+        <div class="farmer-grid" id="farmerGrid"></div>
+      </section>
+
+      <!-- ================= SALES VIEW ================= -->
+      <section class="view" id="view-sales">
+        <div class="page-head-row"><h1>Sales &amp; Invoices</h1></div>
+        <div class="card table-wrap"><table id="salesTable"></table></div>
+      </section>
+
+      <!-- ================= PURCHASES VIEW ================= -->
+      <section class="view" id="view-purchases">
+        <div class="page-head-row"><div><h1>Purchases</h1><p>Purchase rates are saved per transaction and do not change product master prices.</p></div>
+          <div class="head-actions"><button class="btn btn-secondary accounting-only" type="button" onclick="downloadPurchases('pdf')">Export PDF</button><button class="btn btn-secondary accounting-only" type="button" onclick="downloadPurchases('xlsx')">Export Excel</button><button class="btn btn-primary admin-only" type="button" onclick="openStockMovementForm(null,'PURCHASE')"><i data-lucide="plus" class="lucide-icon" aria-hidden="true"></i>Record Purchase</button></div>
+        </div>
+        <p class="purchase-page-note">Master buying and selling prices stay separate from the actual buying rate recorded on each supplier purchase.</p>
+        <div class="card table-wrap"><table id="purchasesTable"></table></div>
+      </section>
+
+      <!-- ================= OUTSTANDING VIEW ================= -->
+      <section class="view" id="view-outstanding">
+        <div class="page-head-row"><h1>Outstanding Payments</h1></div>
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Total Outstanding</span></div>
+            <div class="metric-value" id="oTotalOutstanding">₹0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Due Today</span></div>
+            <div class="metric-value" id="oDueToday">₹0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Older Than 7 Days</span></div>
+            <div class="metric-value" id="oOverdue" style="color:var(--danger)">₹0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-top"><span class="metric-label">Customers With Dues</span></div>
+            <div class="metric-value" id="oCustomersWithDues">0</div>
+          </div>
+        </div>
+        <div class="card table-wrap"><table id="outstandingTable"></table></div>
+      </section>
+
+      <!-- ================= REPORTS VIEW ================= -->
+      <section class="view" id="view-reports">
+        <div class="page-head-row reports-page-head">
+          <span class="reports-page-icon"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i></span><div><span class="report-eyebrow">BUSINESS INTELLIGENCE</span><h1>Reports centre</h1><p class="report-subtitle">Your sales, collections and product performance—ready to download.</p></div>
+          <div class="report-format-control"><label for="reportFormat">EXPORT FORMAT</label><select id="reportFormat" aria-label="Report export format"><option value="pdf">Download PDF</option><option value="xlsx">Download Excel</option><option value="csv">Download CSV</option></select></div>
+        </div>
+        <div class="report-quick-filter" role="group" aria-label="Quick report periods"><span>Quick reports</span><button type="button" class="active" onclick="selectReportPeriod('today', this)">Today</button><button type="button" onclick="selectReportPeriod('weekly', this)">Last 7 Days</button><button type="button" onclick="selectReportPeriod('monthly', this)">Last 30 Days</button><button type="button" onclick="selectReportPeriod('custom', this)">Custom Range</button></div>
+        <div class="reports-kpi-grid" aria-label="Selected period summary"><article class="reports-kpi sales"><span class="reports-kpi-icon"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i></span><div><span>Total Sales</span><strong id="kpiSales">₹0</strong><small id="kpiSalesNote">Current period</small></div><i></i></article><article class="reports-kpi purchases"><span class="reports-kpi-icon"><i data-lucide="shopping-cart" class="lucide-icon" aria-hidden="true"></i></span><div><span>Total Purchases</span><strong id="kpiPurchases">₹0</strong><small>Tracked purchase value</small></div><i></i></article><article class="reports-kpi expenses"><span class="reports-kpi-icon"><i data-lucide="receipt-text" class="lucide-icon" aria-hidden="true"></i></span><div><span>Total Expenses</span><strong id="kpiExpenses">₹0</strong><small>Tracked expense value</small></div><i></i></article><article class="reports-kpi profit"><span class="reports-kpi-icon"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i></span><div><span>Total Profit</span><strong id="kpiProfit">₹0</strong><small>Calculated business profit</small></div><i></i></article></div>
+        <div class="report-downloads legacy-report-downloads" aria-label="Download business reports">
+          <article class="report-download-card"><span class="report-period-icon today">01</span><div><span>DAILY REPORT</span><strong>Today’s report</strong><p>Sales, payments and invoices from today.</p></div><button class="btn btn-secondary report-export-btn" type="button" onclick="downloadReport('today', this)">Export CSV</button></article>
+          <article class="report-download-card"><span class="report-period-icon weekly">07</span><div><span>WEEKLY REPORT</span><strong>Weekly report</strong><p>Last 7 days of business performance.</p></div><button class="btn btn-secondary report-export-btn" type="button" onclick="downloadReport('weekly', this)">Export CSV</button></article>
+          <article class="report-download-card featured"><span class="report-period-icon monthly">30</span><div><span>MONTHLY REPORT</span><strong>Monthly report</strong><p>Last 30 days, including top products.</p></div><button class="btn btn-primary report-export-btn" type="button" onclick="downloadReport('monthly', this)">Export CSV</button></article>
+        </div>
+        <div class="report-downloads report-periods" aria-label="Business report periods">
+          <article class="report-download-card report-period-card" data-period="today"><div class="report-card-top"><span class="report-period-icon today">01</span><span class="report-card-kicker">LIVE TODAY</span><span class="report-date" id="todayRange">Loading…</span></div><div><span>TODAY REPORT</span><strong>Today's Business Overview</strong><p>Sales activity, collections and transactions for the current day.</p></div><div class="report-metric-grid"><div><span>Sales</span><b id="todaySales">₹0</b></div><div><span>Purchases</span><b id="todayPurchases">₹0</b></div><div><span>Expenses</span><b id="todayExpenses">₹0</b></div><div><span>Profit</span><b id="todayProfit">₹0</b></div></div><div class="report-card-footer"><span id="todayTransactions">0 transactions</span><div><button class="btn btn-secondary" type="button" onclick="viewReport('today')">View Detailed Report</button><button class="btn btn-primary report-export-btn" type="button" onclick="downloadReport('today', this)">Export Report</button></div></div></article>
+          <article class="report-download-card report-period-card" data-period="weekly"><div class="report-card-top"><span class="report-period-icon weekly">07</span><span class="report-card-kicker">THIS WEEK</span><span class="report-date" id="weeklyRange">Loading…</span></div><div><span>WEEKLY REPORT</span><strong>Weekly Performance</strong><p>Track sales momentum and activity across the current business week.</p></div><div class="report-metric-grid"><div><span>Sales</span><b id="weeklySales">₹0</b></div><div><span>Purchases</span><b id="weeklyPurchases">₹0</b></div><div><span>Expenses</span><b id="weeklyExpenses">₹0</b></div><div><span>Profit</span><b id="weeklyProfit">₹0</b></div></div><div class="report-card-footer"><span id="weeklyTransactions">0 transactions</span><div><button class="btn btn-secondary" type="button" onclick="viewReport('weekly')">View Detailed Report</button><button class="btn btn-primary report-export-btn" type="button" onclick="downloadReport('weekly', this)">Export Report</button></div></div></article>
+          <article class="report-download-card report-period-card featured" data-period="monthly"><div class="report-card-top"><span class="report-period-icon monthly">30</span><span class="report-card-kicker">THIS MONTH</span><span class="report-date" id="monthlyRange">Loading…</span></div><div><span>MONTHLY REPORT</span><strong>Monthly Business Summary</strong><p>Your high-level view of business progress for the current month.</p></div><div class="report-metric-grid"><div><span>Sales</span><b id="monthlySales">₹0</b></div><div><span>Purchases</span><b id="monthlyPurchases">₹0</b></div><div><span>Expenses</span><b id="monthlyExpenses">₹0</b></div><div><span>Profit</span><b id="monthlyProfit">₹0</b></div></div><div class="report-card-footer"><span id="monthlyTransactions">0 transactions</span><div><button class="btn btn-secondary" type="button" onclick="viewReport('monthly')">View Detailed Report</button><button class="btn btn-primary report-export-btn" type="button" onclick="downloadReport('monthly', this)">Export Report</button></div></div></article>
+        </div>
+        <div id="reportDetail" class="report-detail" aria-live="polite"></div>
+        <div class="report-grid" style="margin-bottom:16px;">
+          <div class="panel reports-analytics-card"><div class="panel-head"><span class="panel-title">Sales Performance</span><span class="analytics-total" id="analyticsSalesTotal">₹0 <small>7-day sales</small></span></div><div class="panel-body" id="salesPerformance"></div><button class="report-link-btn" type="button" onclick="viewReport('weekly')">View Full Report →</button></div>
+          <div class="panel reports-analytics-card"><div class="panel-head"><span class="panel-title">Top Products</span></div><div class="panel-body"><div class="top-products-list" id="topProductsList"></div></div><button class="report-link-btn" type="button" onclick="viewReport('monthly')">View Full Report →</button></div>
+        </div>
+        <div class="report-grid"><div class="panel"><div class="panel-head"><span class="panel-title">Payment Methods</span></div><div class="panel-body" id="paymentMethodsReport"></div></div></div>
+      </section>
+
+      <!-- ================= SETTINGS VIEW ================= -->
+      <section class="view" id="view-accounting">
+        <div class="ca-page-enter">
+          <header class="ca-report-header">
+            <div class="ca-heading-copy">
+              <div class="ca-eyebrow"><span class="ca-eyebrow-mark"><i data-lucide="landmark" class="lucide-icon" aria-hidden="true"></i></span> INTERNAL FINANCIAL REPORT</div>
+              <h1>CA Accounting</h1>
+              <p>Internal purchase cost, sales revenue and gross margin analysis.</p>
+              <div class="ca-sync-meta"><span class="ca-sync-pill" id="accountingSyncStatus"><i data-lucide="refresh-cw" class="lucide-icon" aria-hidden="true"></i> Connecting to shared data</span><span id="accountingLastUpdated">Report not loaded yet</span></div>
+            </div>
+            <div class="ca-export-actions">
+              <button class="btn btn-secondary" type="button" onclick="downloadAccounting('pdf')"><i data-lucide="file-text" class="lucide-icon" aria-hidden="true"></i> Export PDF</button>
+              <button class="btn btn-primary" type="button" onclick="downloadAccounting('xlsx')"><i data-lucide="sheet" class="lucide-icon" aria-hidden="true"></i> Export Excel</button>
+            </div>
+          </header>
+
+          <div class="ca-summary-grid" aria-label="Accounting summary">
+            <article class="ca-summary-card ca-summary-purchase"><div class="ca-summary-top"><span>Total Purchase Value</span><span class="ca-summary-icon"><i data-lucide="shopping-basket" class="lucide-icon" aria-hidden="true"></i></span></div><strong id="caPurchaseTotal">—</strong><small id="caPurchaseNote">Actual purchase transactions</small></article>
+            <article class="ca-summary-card ca-summary-sales"><div class="ca-summary-top"><span>Total Sales Value</span><span class="ca-summary-icon"><i data-lucide="receipt-indian-rupee" class="lucide-icon" aria-hidden="true"></i></span></div><strong id="caSalesTotal">—</strong><small id="caSalesNote">Taxable sales revenue</small></article>
+            <article class="ca-summary-card ca-summary-margin"><div class="ca-summary-top"><span>Gross Margin</span><span class="ca-summary-icon"><i data-lucide="chart-no-axes-combined" class="lucide-icon" aria-hidden="true"></i></span></div><strong id="caMarginTotal">—</strong><small id="caMarginNote">Based on saved cost lines</small></article>
+            <article class="ca-summary-card ca-summary-warning"><div class="ca-summary-top"><span>Missing Cost Snapshots</span><span class="ca-summary-icon"><i data-lucide="triangle-alert" class="lucide-icon" aria-hidden="true"></i></span></div><strong id="caMissingTotal">—</strong><small id="caMissingNote">Historical invoice lines</small></article>
+          </div>
+
+          <section class="ca-cost-panel" aria-labelledby="caCostTitle">
+            <div class="ca-cost-icon"><i data-lucide="clipboard-list" class="lucide-icon" aria-hidden="true"></i></div>
+            <div class="ca-cost-copy"><div class="ca-cost-title-row"><h2 id="caCostTitle">Historical cost snapshot coverage</h2><span class="ca-cost-tag">Review needed</span></div><p>Current Product Master prices are reference values. Missing historical purchase costs stay blank until corrected from a source document.</p>
+              <div class="ca-cost-metrics"><span><b id="caSnapshotTotal">—</b> invoice lines</span><span><b id="caSnapshotSaved">—</b> saved snapshots</span><span><b id="caSnapshotMissing">—</b> missing snapshots</span><span><b id="caSnapshotPercent">—</b> missing</span></div>
+            </div>
+            <button class="btn btn-secondary ca-view-missing" type="button" onclick="viewMissingAccountingRecords()"><i data-lucide="list-filter" class="lucide-icon" aria-hidden="true"></i> View Missing Records</button>
+          </section>
+
+          <section class="ca-analysis-section" aria-label="Gross margin analysis">
+            <div class="ca-section-heading"><div><span class="ca-section-kicker">PERFORMANCE</span><h2>Gross margin analysis</h2><p>Margin uses taxable sales and only recorded historical cost snapshots.</p></div><div class="ca-margin-coverage" id="caMarginCoverage">Margin coverage —</div></div>
+            <div class="ca-margin-strip"><div><span>Total purchase cost</span><strong id="caAnalysisPurchase">—</strong></div><div><span>Total sales revenue</span><strong id="caAnalysisSales">—</strong></div><div><span>Gross margin</span><strong id="caAnalysisMargin">—</strong></div><div><span>Margin percentage</span><strong id="caAnalysisPercent">—</strong></div></div>
+          </section>
+
+          <section class="ca-analytics-grid" aria-label="Accounting charts">
+            <article class="ca-chart-card ca-chart-wide"><div class="ca-chart-heading"><div><h3>Monthly sales vs purchase</h3><p>Taxable sales and recorded purchase totals</p></div><span class="ca-chart-legend"><i class="ca-legend-sales"></i> Sales <i class="ca-legend-purchase"></i> Purchase</span></div><div id="caMonthlyChart" class="ca-chart-body"></div></article>
+            <article class="ca-chart-card"><div class="ca-chart-heading"><div><h3>Gross margin trend</h3><p>Saved cost snapshots only</p></div></div><div id="caMarginChart" class="ca-chart-body"></div></article>
+            <article class="ca-chart-card"><div class="ca-chart-heading"><div><h3>Product-wise sales</h3><p>Taxable sales revenue</p></div></div><div id="caProductSalesChart" class="ca-chart-body ca-chart-bars"></div></article>
+            <article class="ca-chart-card"><div class="ca-chart-heading"><div><h3>Product-wise purchase cost</h3><p>Recorded supplier transactions</p></div></div><div id="caProductPurchaseChart" class="ca-chart-body ca-chart-bars"></div></article>
+          </section>
+
+          <section class="ca-report-card" aria-labelledby="caTransactionsTitle">
+            <div class="ca-table-heading"><div><span class="ca-section-kicker">TRANSACTION LEDGER</span><h2 id="caTransactionsTitle">Product-wise accounting</h2><p>Master prices are current references; transaction rates are saved historical values.</p></div><div class="ca-table-count" id="accountingReportStatus" aria-live="polite">Loading accounting records…</div></div>
+            <form class="ca-filter-panel" id="accountingFilters" onsubmit="applyAccountingFilters(event)">
+              <label>From date<input id="caFilterFrom" name="start_date" type="date"></label>
+              <label>To date<input id="caFilterTo" name="end_date" type="date"></label>
+              <label>Invoice number<input id="caFilterInvoice" name="invoice_search" type="search" placeholder="e.g. INV-001"></label>
+              <label>Product<input id="caFilterProduct" name="product_search" type="search" placeholder="Search product"></label>
+              <label>Customer / supplier<input id="caFilterCustomer" name="customer_search" type="search" placeholder="Search party"></label>
+              <label>Transaction type<select id="caFilterType" name="transaction_type"><option value="all">All types</option><option value="sale">Sales</option><option value="purchase">Purchases</option></select></label>
+              <label>Cost snapshot<select id="caFilterMissing" name="missing_cost_snapshot"><option value="all">All records</option><option value="missing">Missing only</option><option value="saved">Saved only</option></select></label>
+              <div class="ca-filter-actions"><button class="btn btn-secondary" type="button" onclick="clearAccountingFilters()"><i data-lucide="rotate-ccw" class="lucide-icon" aria-hidden="true"></i> Clear</button><button class="btn btn-primary" type="submit"><i data-lucide="filter" class="lucide-icon" aria-hidden="true"></i> Apply Filters</button></div>
+            </form>
+            <div id="accountingReportStatusDetail" class="ca-filter-status" aria-live="polite"></div>
+            <div class="ca-table-scroll" tabindex="0" role="region" aria-label="Scrollable accounting transactions"><table id="accountingTable" class="ca-accounting-table"></table></div>
+            <div class="ca-pagination"><span id="caPaginationStatus">—</span><div class="ca-pagination-controls"><label>Rows <select id="caPageSize" onchange="changeAccountingPageSize(this.value)"><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label><button type="button" class="btn btn-secondary" id="caPrevPage" onclick="changeAccountingPage(-1)" aria-label="Previous page"><i data-lucide="chevron-left" class="lucide-icon" aria-hidden="true"></i></button><button type="button" class="btn btn-secondary" id="caNextPage" onclick="changeAccountingPage(1)" aria-label="Next page"><i data-lucide="chevron-right" class="lucide-icon" aria-hidden="true"></i></button></div></div>
+          </section>
+        </div>
+
+        <dialog class="ca-correction-dialog" id="accountingCorrectionDialog" aria-labelledby="caCorrectionTitle">
+          <form id="accountingCorrectionForm" onsubmit="saveAccountingCostCorrection(event)">
+            <div class="ca-dialog-heading"><div><span class="ca-section-kicker">CONTROLLED HISTORICAL UPDATE</span><h2 id="caCorrectionTitle">Add a cost snapshot</h2><p id="caCorrectionProduct">Historical invoice prices will not be changed.</p></div><button class="btn btn-ghost" type="button" onclick="closeAccountingCostCorrection()" aria-label="Close"><i data-lucide="x" class="lucide-icon" aria-hidden="true"></i></button></div>
+            <div class="ca-correction-note"><i data-lucide="shield-check" class="lucide-icon" aria-hidden="true"></i><span>Enter values from a purchase bill or other source record. Product Master prices will remain untouched.</span></div>
+            <label>Purchase cost per unit, excluding GST<input id="caCorrectionExTax" name="unit_cost_ex_tax" type="number" min="0" step="0.01" required></label>
+            <label>Purchase rate per unit, including GST (if shown)<input id="caCorrectionInclTax" name="unit_cost_incl_gst" type="number" min="0" step="0.01"></label>
+            <label>Source document / reference<input id="caCorrectionSource" name="source_reference" type="text" maxlength="200" required placeholder="Bill number or document reference"></label>
+            <label>Reason for correction<textarea id="caCorrectionReason" name="reason" rows="3" maxlength="1000" required placeholder="Explain where the historical price was verified"></textarea></label>
+            <div class="ca-dialog-actions"><button class="btn btn-secondary" type="button" onclick="closeAccountingCostCorrection()">Cancel</button><button class="btn btn-primary" type="submit">Save audited correction</button></div>
+          </form>
+        </dialog>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-head-row"><h1>Account Settings</h1></div>
+        <div class="card" style="padding:22px;">
+          <div style="display:flex; gap:14px; align-items:center; margin-bottom:18px;">
+            <div class="avatar" style="width:52px;height:52px;font-size:16px;">SP</div>
+            <div>
+              <div style="font-weight:700; font-size:14.5px;" id="accountName">Signed in user</div>
+              <div style="font-size:12px; color:var(--charcoal-soft);">Shop Admin · Adinath Agri Services</div>
+            </div>
+          </div>
+          <div class="accounting-only" style="margin:0 0 18px;">
+            <button class="btn btn-primary" type="button" onclick="goTo('accounting')">Open CA Accounting</button>
+          </div>
+          <form id="businessSettingsForm" class="entity-form admin-only" onsubmit="saveBusinessSettings(event)">
+            <h2>Invoice business and bank details</h2>
+            <p>Bank fields stay blank until verified Adinath bank details are entered.</p>
+            <label>Business name<input name="business_name" required></label><label>Business address<input name="address"></label>
+            <label>GSTIN/UIN<input name="gstin"></label><label>State name<input name="state_name"></label><label>State code<input name="state_code" maxlength="2"></label><label>Contact number<input name="phone"></label>
+            <label>Bank name<input name="bank_name"></label><label>Account holder name<input name="account_holder_name"></label><label>Account number<input name="account_number"></label><label>Branch<input name="branch"></label><label>IFSC code<input name="ifsc_code"></label>
+            <label>Invoice declaration<textarea name="declaration" rows="3"></textarea></label><div class="form-error" id="businessSettingsError" role="alert"></div>
+            <button class="btn btn-primary" type="submit">Save Invoice Settings</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Mobile bottom nav -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a class="mobile-nav-item active" data-view="dashboard">
+        <i data-lucide="layout-dashboard" class="lucide-icon" aria-hidden="true"></i>
+        Home
+      </a>
+      <a class="mobile-nav-item" data-view="billing">
+        <i data-lucide="receipt-text" class="lucide-icon" aria-hidden="true"></i>
+        Billing
+      </a>
+      <a class="mobile-nav-item" data-view="products">
+        <i data-lucide="package" class="lucide-icon" aria-hidden="true"></i>
+        Products
+      </a>
+      <a class="mobile-nav-item" data-view="farmers">
+        <i data-lucide="user-round" class="lucide-icon" aria-hidden="true"></i>
+        Customers
+      </a>
+      <a class="mobile-nav-item" data-view="settings">
+        <i data-lucide="settings" class="lucide-icon" aria-hidden="true"></i>
+        Account
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- Farmer Picker Modal -->
+<div class="modal-overlay" id="farmerModal">
+  <div class="modal">
+    <div class="modal-head"><h3>Select Customer</h3><button class="modal-close" onclick="closeModal('farmerModal')"><i data-lucide="x" class="lucide-icon" aria-hidden="true"></i></button></div>
+    <div class="modal-body">
+      <div class="search-box" style="margin-bottom:10px; width:100%;">
+        <i data-lucide="search" class="lucide-icon" aria-hidden="true"></i>
+        <input id="farmerPickerSearch" type="search" placeholder="Search by name or mobile" aria-label="Search customers" style="width:100%;">
+      </div>
+      <div id="farmerPickList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Invoice Modal -->
+<div class="modal-overlay" id="entityModal" role="dialog" aria-modal="true" aria-labelledby="entityModalTitle">
+  <div class="modal">
+    <div class="modal-head"><h3 id="entityModalTitle">Create record</h3><button class="modal-close" type="button" aria-label="Close" onclick="closeModal('entityModal')"><i data-lucide="x" class="lucide-icon" aria-hidden="true"></i></button></div>
+    <form class="modal-body entity-form" id="entityForm"></form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="invoiceModal">
+  <div class="modal invoice-modal">
+    <div class="modal-head"><h3>Invoice Preview</h3><div class="head-actions"><button class="btn btn-whatsapp" type="button" onclick="sendInvoiceWhatsApp()">WhatsApp</button><button class="btn btn-sms" type="button" onclick="sendInvoiceSms()">SMS</button><button class="btn btn-secondary" type="button" onclick="downloadInvoicePdf()"><i data-lucide="download" class="lucide-icon" aria-hidden="true"></i>Download PDF</button><button class="btn btn-primary" type="button" onclick="printInvoice()"><i data-lucide="printer" class="lucide-icon" aria-hidden="true"></i>Print</button><button class="modal-close" type="button" aria-label="Close" onclick="closeModal('invoiceModal')"><i data-lucide="x" class="lucide-icon" aria-hidden="true"></i></button></div></div>
+    <div class="modal-body" style="padding:0;">
+      <div class="invoice-sheet" id="invoiceSheet"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="productDetailsModal" role="dialog" aria-modal="true" aria-labelledby="productDetailsTitle">
+  <div class="modal product-details-modal">
+    <div class="modal-head"><h3 id="productDetailsTitle">Product Details</h3><button class="modal-close" type="button" aria-label="Close" onclick="closeModal('productDetailsModal')"><i data-lucide="x" class="lucide-icon" aria-hidden="true"></i></button></div>
+    <div class="modal-body" id="productDetailsBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="circle-check" class="lucide-icon" aria-hidden="true"></i><span id="toastText">Saved</span></div>
+
+<script src="/static/js/vendor/lucide-1.74.0.min.js"></script>
+<script src="/static/js/app.js?v=ca-accounting-1"></script>
+</body>
+</html>

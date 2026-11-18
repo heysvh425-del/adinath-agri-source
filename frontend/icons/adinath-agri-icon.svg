@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Adinath Agri Services">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6d77c"/><stop offset="1" stop-color="#e7974e"/></linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9dc82"/><stop offset="1" stop-color="#3e8754"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#173e2a"/>
+  <circle cx="330" cy="162" r="58" fill="#fff2b5"/>
+  <path d="M48 316c63-107 139-161 208-161s146 54 208 161v119H48z" fill="url(#sky)"/>
+  <path d="M48 326c68-57 137-82 208-82s140 25 208 82v138H48z" fill="url(#field)"/>
+  <path d="M70 381c112-61 259-61 372 0M70 442c112-61 259-61 372 0" fill="none" stroke="#e9f4c8" stroke-width="15" stroke-linecap="round" opacity=".9"/>
+  <path d="M238 292c0-74 33-125 104-153-8 72-43 126-104 153Z" fill="#d3ed9f"/>
+  <path d="M238 292c43-42 78-92 104-153M238 292c-48-8-81-41-98-91 62-3 91 31 98 91Z" fill="none" stroke="#285d3b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

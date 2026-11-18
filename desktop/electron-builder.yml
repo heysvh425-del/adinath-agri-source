@@ -1,0 +1,30 @@
+appId: com.adinathagri.services
+productName: Adinath Agri Services
+directories:
+  output: desktop/release
+files:
+  - desktop/**/*
+  - frontend/icons/**/*
+  - package.json
+  - '!desktop/backend-dist/**/*'
+  - '!desktop/.pyinstaller-work/**/*'
+  - '!desktop/release/**/*'
+extraResources:
+  - from: desktop/backend-dist/AdinathAgriBackend
+    to: backend
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: desktop/assets/adinath-agri-services.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Adinath Agri Services
+  artifactName: Adinath-Agri-Services-Setup-${version}.${ext}
+  installerIcon: desktop/assets/adinath-agri-services.ico
+  uninstallerIcon: desktop/assets/adinath-agri-services.ico
+  installerHeaderIcon: desktop/assets/adinath-agri-services.ico

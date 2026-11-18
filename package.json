@@ -1,0 +1,17 @@
+{
+  "name": "adinath-agri-services-desktop",
+  "version": "1.0.0",
+  "description": "Adinath Agri Services Windows desktop application",
+  "main": "desktop/main.js",
+  "author": "Adinath Agri Services",
+  "license": "UNLICENSED",
+  "scripts": {
+    "desktop:dev": "set \"ELECTRON_RUN_AS_NODE=\" && electron .",
+    "desktop:backend": "backend\\venv\\Scripts\\python.exe -m PyInstaller --noconfirm --distpath desktop\\backend-dist --workpath desktop\\.pyinstaller-work AdinathAgriBackend.spec",
+    "desktop:dist": "npm run desktop:backend && electron-builder --config desktop\\electron-builder.yml --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.12"
+  }
+}

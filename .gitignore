@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+backend/venv/
+.pytest_cache/
+
+# Local data, backups, and credentials
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-*
+backend/backups/
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# Generated reports and build artifacts
+reports/
+screenshots/
+build-archive/
+dist/
+desktop/release*/
+desktop/fresh-user-data/
+desktop/backend-dist/
+desktop/.pyinstaller-work/
+*.exe
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
